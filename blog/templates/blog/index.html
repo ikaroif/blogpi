@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Profissional</title>
+    {% load static %}
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .navbar {
+            background-color: #007bff;
+            border-bottom: 2px solid #0056b3;
+        }
+        
+        .navbar-brand {
+            color: #fff;
+            font-weight: bold;
+        }
+        
+        .navbar-nav .nav-link {
+            color: #fff;
+        }
+        
+        .navbar-nav .nav-link:hover {
+            color: #dcdcdc;
+        }
+        
+        .container {
+            padding: 20px;
+        }
+        
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .card:hover {
+            transform: scale(1.05);
+        }
+        
+        .card-img-top {
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            object-fit: cover;
+        }
+        
+        .img-fluid {
+            border-radius: 50%;
+        }
+        
+        .list-group-item {
+            border: none;
+            border-radius: 5px;
+            background-color: #fff;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .list-group-item:hover {
+            background-color: #f1f1f1;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            color: #666;
+        }
+        
+        .about-img {
+            display: block;
+            margin: 20px auto;
+            border: 5px solid #007bff;
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+        }
+        
+        .footer {
+            background-color: #007bff;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/">Meu Blog</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Início</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/sobre/">Sobre</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="header">
+        <h1>Bem-vindo ao Meu Blog</h1>
+        <p>Compartilhando meus cursos e interesses</p>
+    </header>
+
+    <div class="container">
+        <h2>Meus Cursos</h2>
+        <div class="list-group">
+            {% for curso in cursos %}
+            <div class="list-group-item">
+                <h5 class="mb-1">{{ curso.nome }}</h5>
+                <p class="mb-1">{{ curso.descricao }}</p>
+                <small>Conclusão: {{ curso.data_conclusao }}</small>
+            </div>
+            {% endfor %}
+        </div>
+
+        <h2 class="mt-4">Meus Interesses</h2>
+        <div class="row">
+            {% for interesse in interesses %}
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    {% if interesse.imagem %}
+                    <img src="{% static 'blog/'|add:interesse.imagem %}" class="card-img-top" alt="{{ interesse.titulo }}"> {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ interesse.titulo }}</h5>
+                        <p class="card-text">{{ interesse.descricao }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; {{ current_year }} Meu Blog. Todos os direitos reservados.</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
